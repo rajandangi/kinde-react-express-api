@@ -7,6 +7,7 @@ const index = (req, res) =>
       books: [
         { id: "ab", title: "hawk" },
         { id: "cd", title: "something else" },
+        { id: "ef", title: "My book title" },
       ],
     },
   });

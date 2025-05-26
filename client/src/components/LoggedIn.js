@@ -4,10 +4,12 @@ import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
 export default function LoggedIn() {
   const { user, logout, getToken } = useKindeAuth();
   const [books, setBooks] = useState([]);
+  const [organizations, setOrganizations] = useState([]);
 
   const fetchBooks = async () => {
     try {
       const accessToken = await getToken();
+      console.log("Kinde Access Token:", accessToken);
       const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/books`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -15,6 +17,25 @@ export default function LoggedIn() {
       });
       const { data } = await res.json();
       setBooks(data.books);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchOrganizations = async () => {
+    try {
+      const accessToken = await getToken();
+      console.log("Kinde Access Token:", accessToken);
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/organizations`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      const { data } = await res.json();
+      setOrganizations(data.organizations);
     } catch (err) {
       console.log(err);
     }
@@ -60,6 +81,24 @@ export default function LoggedIn() {
             <ul>
               {books
                 ? books.map((item) => <li key={item.id}>{item.title}</li>)
+                : null}
+            </ul>
+          </section>
+         
+          <section className="next-steps-section">
+            <h2 className="text-heading-1">Technical Task</h2>
+            <button
+              className="btn btn-dark"
+              type="button"
+              onClick={fetchOrganizations}
+            >
+              Fetch Organizations
+            </button>
+            <ul>
+              {organizations
+                ? organizations.map((item) => (
+                    <li key={item.code}>{item.name}</li>
+                  ))
                 : null}
             </ul>
           </section>

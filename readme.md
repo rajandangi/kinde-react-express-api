@@ -67,3 +67,13 @@ Make sure both frontend and backend are running. In the browser navigate to [htt
 You will be redirected to the logged in view of this starter kit which includes a "Fetch books" button.
 
 Clicking this button will render a list of books fetched from the protected API.
+
+
+## Steps for creating M2M Appliction
+1. Go to the Kinde dashboard and navigate to `Settings -> Applications`.
+2. Click on `Add Application`.
+3. Select `Machine to Machine(M2M)`.
+4. Provide a name for your application.
+5. Get the `Client ID` and `Client Secret` from the newly created M2M application.
+6. Go to the Application APIs tab and authorize the API you want to access.
+7. After authorizing the API, you will see the scopes that you can use with this M2M application.
